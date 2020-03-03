@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    color: ${props => (props.theme === "purple" ? "purple" : "black")};
+    color: #1f1a51;
     height: 100%;
     background-color: #fff200;
   }
@@ -75,7 +75,7 @@ const Layout = ({ location, title, children }) => {
   }
   return (
     <Container>
-      <GlobalStyle theme="white" />
+      <GlobalStyle />
       <header>{header}</header>
       <main>{children}</main>
       <footer>
