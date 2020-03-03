@@ -1,7 +1,31 @@
 import React from "react"
 import { Link } from "gatsby"
+import styled, { createGlobalStyle } from "styled-components"
 
 import { rhythm, scale } from "../utils/typography"
+
+const GlobalStyle = createGlobalStyle`
+  html {
+    height: 100%;
+  }
+
+  body {
+    color: ${props => (props.theme === "purple" ? "purple" : "black")};
+    height: 100%;
+    background-color: #fff200;
+  }
+
+  #___gatsby {
+    height: 100%;
+  }
+`
+const Container = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+  max-width: ${rhythm(24)};
+  padding: ${rhythm(1.5)} ${rhythm(3 / 4)};
+  background-color: #fff200;
+`
 
 const Layout = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
@@ -50,14 +74,8 @@ const Layout = ({ location, title, children }) => {
     )
   }
   return (
-    <div
-      style={{
-        marginLeft: `auto`,
-        marginRight: `auto`,
-        maxWidth: rhythm(24),
-        padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
-      }}
-    >
+    <Container>
+      <GlobalStyle theme="white" />
       <header>{header}</header>
       <main>{children}</main>
       <footer>
@@ -65,7 +83,7 @@ const Layout = ({ location, title, children }) => {
         {` `}
         <a href="https://www.gatsbyjs.org">Gatsby</a>
       </footer>
-    </div>
+    </Container>
   )
 }
 
