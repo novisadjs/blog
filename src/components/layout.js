@@ -38,14 +38,14 @@ const H1 = styled.h1`
   margin-top: 0;
 `
 
-function RootHeader({ title }) {
+function RootHeader({ children }) {
   return (
     <H1
       style={{
         ...scale(1.5),
       }}
     >
-      <StyledLink to={`/`}>{title}</StyledLink>
+      {children}
     </H1>
   )
 }
@@ -55,12 +55,8 @@ const H3 = styled.h3`
   margin-top: 0;
 `
 
-function PostHeader({ title }) {
-  return (
-    <H3>
-      <StyledLink to={`/`}>{title}</StyledLink>
-    </H3>
-  )
+function PostHeader({ children }) {
+  return <H3>{children}</H3>
 }
 
 const Layout = ({ location, title, children }) => {
@@ -71,9 +67,13 @@ const Layout = ({ location, title, children }) => {
       <GlobalStyle />
       <header>
         {location.pathname === rootPath ? (
-          <RootHeader title={title} />
+          <RootHeader>
+            <StyledLink to="/">{title}</StyledLink>
+          </RootHeader>
         ) : (
-          <PostHeader title={title} />
+          <PostHeader>
+            <StyledLink to="/">{title}</StyledLink>
+          </PostHeader>
         )}
       </header>
       <main>{children}</main>
