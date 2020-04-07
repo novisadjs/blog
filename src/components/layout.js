@@ -27,56 +27,55 @@ const Container = styled.div`
   background-color: #fff200;
 `
 
+const StyledLink = styled(Link)`
+  box-shadow: none;
+  text-decoration: none;
+  color: inherit;
+`
+
+const H1 = styled.h1`
+  margin-bottom: ${rhythm(1.5)};
+  margin-top: 0;
+`
+
+function RootHeader({ title }) {
+  return (
+    <H1
+      style={{
+        ...scale(1.5),
+      }}
+    >
+      <StyledLink to={`/`}>{title}</StyledLink>
+    </H1>
+  )
+}
+
+const H3 = styled.h3`
+  font-family: Montserrat, sans-serif;
+  margin-top: 0;
+`
+
+function PostHeader({ title }) {
+  return (
+    <H3>
+      <StyledLink to={`/`}>{title}</StyledLink>
+    </H3>
+  )
+}
+
 const Layout = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
-  let header
 
-  if (location.pathname === rootPath) {
-    header = (
-      <h1
-        style={{
-          ...scale(1.5),
-          marginBottom: rhythm(1.5),
-          marginTop: 0,
-        }}
-      >
-        <Link
-          style={{
-            boxShadow: `none`,
-            textDecoration: `none`,
-            color: `inherit`,
-          }}
-          to={`/`}
-        >
-          {title}
-        </Link>
-      </h1>
-    )
-  } else {
-    header = (
-      <h3
-        style={{
-          fontFamily: `Montserrat, sans-serif`,
-          marginTop: 0,
-        }}
-      >
-        <Link
-          style={{
-            boxShadow: `none`,
-            textDecoration: `none`,
-            color: `inherit`,
-          }}
-          to={`/`}
-        >
-          {title}
-        </Link>
-      </h3>
-    )
-  }
   return (
     <Container>
       <GlobalStyle />
-      <header>{header}</header>
+      <header>
+        {location.pathname === rootPath ? (
+          <RootHeader title={title} />
+        ) : (
+          <PostHeader title={title} />
+        )}
+      </header>
       <main>{children}</main>
       <footer>
         © {new Date().getFullYear()}, Built with

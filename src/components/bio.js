@@ -8,8 +8,21 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Image from "gatsby-image"
+import styled from "styled-components"
 
 import { rhythm } from "../utils/typography"
+
+const BioContainer = styled.div`
+  display: flex;
+  margin-bottom: ${rhythm(2.5)};
+`
+
+const StyledImage = styled(Image)`
+  margin-right: ${rhythm(1 / 2)};
+  margin-bottom: 0;
+  min-width: 50;
+  borderradius: 100%;
+`
 
 const Bio = () => {
   const data = useStaticQuery(graphql`
@@ -32,22 +45,12 @@ const Bio = () => {
   `)
 
   const { social } = data.site.siteMetadata
+
   return (
-    <div
-      style={{
-        display: `flex`,
-        marginBottom: rhythm(2.5),
-      }}
-    >
-      <Image
+    <BioContainer>
+      <StyledImage
         fixed={data.avatar.childImageSharp.fixed}
         alt={"Novi Sad JS logo"}
-        style={{
-          marginRight: rhythm(1 / 2),
-          marginBottom: 0,
-          minWidth: 50,
-          borderRadius: `100%`,
-        }}
         imgStyle={{
           borderRadius: `50%`,
         }}
@@ -59,7 +62,7 @@ const Bio = () => {
           You should follow NS JS on Twitter
         </a>
       </p>
-    </div>
+    </BioContainer>
   )
 }
 
