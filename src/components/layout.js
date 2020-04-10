@@ -20,6 +20,14 @@ const GlobalStyle = createGlobalStyle`
     transition: .2s linear;
   }
 
+  ::selection {
+    background: ${({ theme }) => theme.text}; /* WebKit/Blink Browsers */
+  }
+
+  ::-moz-selection {
+    background: ${({ theme }) => theme.text}; /* Gecko Browsers */
+  }
+
   #___gatsby {
     height: 100%;
   }
@@ -29,7 +37,7 @@ const Container = styled.div`
   margin-right: auto;
   max-width: ${rhythm(24)};
   padding: ${rhythm(1.5)} ${rhythm(3 / 4)};
-  background-color: ${({ theme }) => theme.body};
+  background-color: transparent;
   transition: .2s linear;
 `
 
