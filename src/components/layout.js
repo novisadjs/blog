@@ -21,10 +21,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   ::selection {
+    color: ${({ theme }) => theme.body};
     background: ${({ theme }) => theme.text}; /* WebKit/Blink Browsers */
   }
 
   ::-moz-selection {
+    color: ${({ theme }) => theme.body};
     background: ${({ theme }) => theme.text}; /* Gecko Browsers */
   }
 
