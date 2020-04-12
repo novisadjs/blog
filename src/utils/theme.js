@@ -5,5 +5,5 @@ export const lightTheme = {
 
 export const darkTheme = {
   body: '#110e33',
-  text: '#fff200',
+  text: '#e8dd00', //dimmed yellow, easier to read on dark background
 }

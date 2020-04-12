@@ -18,6 +18,7 @@ const BioContainer = styled.div`
 `
 
 const StyledImage = styled(Image)`
+  flex-shrink: 0;
   margin-right: ${rhythm(1 / 2)};
   margin-bottom: 0;
   min-width: 50;
