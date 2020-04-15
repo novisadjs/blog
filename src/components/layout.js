@@ -144,7 +144,7 @@ const Layout = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
 
   return (
-    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <Container>
         <GlobalStyle />
         <header>
@@ -161,8 +161,9 @@ const Layout = ({ location, title, children }) => {
         </header>
         <main>{children}</main>
         <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
+          © {new Date().getFullYear()}, This site is powered by{" "}
+          <a href="https://www.netlify.com/">Netlify</a>, and built with
+          {" "}
           <a href="https://www.gatsbyjs.org">Gatsby</a>
         </footer>
       </Container>
