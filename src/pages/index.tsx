@@ -6,24 +6,55 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { Post } from "../components/Post"
 
-const BlogIndex = ({ data, location }) => {
+interface Post {
+  node: {
+    fields: {
+      slug: string,
+    }
+    frontmatter: {
+      title: string
+      date: string
+      description: string
+      slug: string
+    }
+    excerpt: string
+  }
+}
+
+interface Props {
+  data: {
+    site: {
+      siteMetadata: {
+        title: string
+      }
+    }
+    allMarkdownRemark: {
+      edges: Post[]
+    }
+  }
+  location: Location
+}
+
+const BlogIndex = ({ data, location }: Props) => {
   const siteTitle = data.site.siteMetadata.title
   const posts = data.allMarkdownRemark.edges
 
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="All posts" />
+      <>
+        {posts.map(({ node }) => (
+          <Post
+            key={node.fields.slug}
+            slug={node.fields.slug}
+            title={node.frontmatter.title || node.fields.slug}
+            date={node.frontmatter.date}
+          >
+            {node.frontmatter.description || node.excerpt}
+          </Post>
+        ))}
+      </>
       <Bio />
-      {posts.map(({ node }) => (
-        <Post
-          key={node.fields.slug}
-          slug={node.fields.slug}
-          title={node.frontmatter.title || node.fields.slug}
-          date={node.frontmatter.date}
-        >
-          {node.frontmatter.description || node.excerpt}
-        </Post>
-      ))}
     </Layout>
   )
 }
