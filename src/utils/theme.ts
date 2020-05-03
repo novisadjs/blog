@@ -1,3 +1,8 @@
+export interface Theme {
+  body: string
+  text: string
+}
+
 export const lightTheme = {
   body: '#fff200',
   text: '#1f1a51',

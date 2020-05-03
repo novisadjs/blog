@@ -8,7 +8,14 @@ const H3 = styled.div`
   margin-bottom: ${rhythm(1 / 4)};
 `
 
-export function Post({ slug, title, date, children }) {
+interface Props {
+  slug: string
+  title: string
+  date: string
+  children: string
+}
+
+export function Post({ slug, title, date, children }: Props) {
   return (
     <article key={slug}>
       <header>

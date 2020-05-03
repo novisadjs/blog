@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, ReactElement } from "react"
 import { Link } from "gatsby"
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components"
-import { lightTheme, darkTheme } from "../utils/theme";
+import { lightTheme, darkTheme, Theme } from "../utils/theme";
 
 import { rhythm, scale } from "../utils/typography"
 
 import MoonIcon from '../../content/assets/moon.svg';
 import SunIcon from '../../content/assets/sun.svg';
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
   html {
     height: 100%;
   }
@@ -89,7 +89,11 @@ const H1 = styled.h1`
   margin-top: 0;
 `
 
-function RootHeader({ children }) {
+interface RootHeaderProps {
+  children: ReactElement
+}
+
+function RootHeader({ children }: RootHeaderProps) {
   return (
     <H1
       style={{
@@ -106,11 +110,30 @@ const H3 = styled.h3`
   margin-top: 0;
 `
 
-function PostHeader({ children }) {
+interface PostHeaderProps {
+  children: ReactElement
+}
+
+function PostHeader({ children }: PostHeaderProps) {
   return <H3>{children}</H3>
 }
 
-const Layout = ({ location, title, children }) => {
+const ThemeChanger = ({ theme, toggleTheme }: { theme: string, toggleTheme: () => void }) => (
+    <ThemeChangerWrapper>
+      <ThemeChangerBtn theme={theme} onClick={toggleTheme}>
+        <SunIcon />
+        <MoonIcon />
+      </ThemeChangerBtn>
+    </ThemeChangerWrapper>
+  )
+
+interface Props {
+  location: Location
+  title: string
+  children: ReactElement[]
+}
+
+const Layout = ({ location, title, children }: Props) => {
 
   const [theme, setTheme] = useState('light');
 
@@ -130,16 +153,6 @@ const Layout = ({ location, title, children }) => {
     }
   }
 
-  const ThemeChanger = () => {
-    return(
-      <ThemeChangerWrapper>
-        <ThemeChangerBtn theme={theme} onClick={toggleTheme}>
-          <SunIcon />
-          <MoonIcon />
-        </ThemeChangerBtn>
-      </ThemeChangerWrapper>
-    )
-  }
 
   const rootPath = `${__PATH_PREFIX__}/`
 
@@ -157,7 +170,7 @@ const Layout = ({ location, title, children }) => {
               <StyledLink to="/">{title}</StyledLink>
             </PostHeader>
           )}
-          <ThemeChanger />
+        <ThemeChanger theme={theme} toggleTheme={toggleTheme} />
         </header>
         <main>{children}</main>
         <footer>
